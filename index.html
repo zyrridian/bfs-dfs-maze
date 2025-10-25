@@ -30,7 +30,7 @@
         </button>
       </h1>
       <div class="subtitle">
-        Watch how different algorithms explore the maze!
+        Watch how different algorithms explore the maze
       </div>
 
       <!-- Info Overlay -->
@@ -38,66 +38,48 @@
         <div class="info-content">
           <button class="info-close" onclick="toggleInfo()">×</button>
 
-          <h2>About the Algorithms</h2>
+          <h2>How These Algorithms Work</h2>
 
           <div class="info-section">
-            <h3>Breadth-First Search (BFS)</h3>
+            <h3>Breadth-First Search</h3>
             <p>
-              BFS explores the maze like ripples spreading in water - it checks
-              all nearby cells before moving further away. This guarantees
-              finding the shortest path because it explores systematically level
-              by level using a queue.
+              BFS explores the maze like ripples in water - it checks nearby
+              cells first before moving further away. This means it always finds
+              the shortest path because it explores level by level.
             </p>
-
             <p>
-              <strong>Real-world example:</strong> GPS navigation uses BFS to
-              find the shortest route. Facebook's "People You May Know" feature
-              uses it to suggest friends based on mutual connections.
-            </p>
-
-            <p class="note">
-              Best when you need the shortest path and have enough memory to
-              store all possibilities.
+              Think of GPS navigation finding the shortest route, or Facebook
+              suggesting friends based on mutual connections.
             </p>
           </div>
 
           <div class="info-section">
-            <h3>Depth-First Search (DFS)</h3>
+            <h3>Depth-First Search</h3>
             <p>
-              DFS commits to one direction and explores as deep as possible
-              before backtracking. It's like following one path in the woods
-              until you hit a dead end, then returning to try another route.
-              Uses less memory but might not find the shortest path.
+              DFS picks a direction and goes as far as possible before
+              backtracking. Like following one path in the woods until hitting a
+              dead end, then trying another route. Uses less memory but might
+              take longer paths.
             </p>
-
             <p>
-              <strong>Real-world example:</strong> When you search through
-              nested folders on your computer, or when robots navigate mazes by
-              following the right-hand wall rule.
-            </p>
-
-            <p class="note">
-              Best when any solution works and you want to save memory, or when
-              solutions are deep in the tree.
+              You see this when browsing nested folders on your computer, or
+              when robots navigate by following walls.
             </p>
           </div>
 
           <div class="info-section">
-            <h3>Quick Comparison</h3>
+            <h3>Main Differences</h3>
             <p>
-              <strong>BFS:</strong> Guarantees shortest path, uses more memory,
-              explores evenly in all directions.
-            </p>
-            <p>
-              <strong>DFS:</strong> May take longer paths, uses less memory,
-              goes deep into one direction.
+              BFS guarantees the shortest path and explores evenly, but needs
+              more memory. DFS uses less memory and can be faster sometimes, but
+              the path might be longer.
             </p>
           </div>
 
           <div class="info-footer">
             <p>
-              Generate different mazes and observe how BFS spreads like a wave
-              while DFS dives into paths.
+              Generate different mazes to see how BFS spreads out while DFS
+              dives deep into paths.
             </p>
           </div>
         </div>
