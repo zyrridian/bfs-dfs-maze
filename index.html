@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Maze Solver - BFS vs DFS</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Maze Solver: BFS vs DFS</h1>
+      <div class="subtitle">
+        Watch how different algorithms explore the maze!
+      </div>
+
+      <div class="controls">
+        <div class="control-group">
+          <div class="group-label">Actions</div>
+          <div class="button-group size-group">
+            <button
+              onclick="generateMaze()"
+              id="generateBtn"
+              class="primary-btn"
+            >
+              Generate New Maze
+            </button>
+            <button onclick="reset()" id="resetBtn" class="secondary-btn">
+              Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="group-label">Solve</div>
+          <div class="button-group size-group">
+            <button onclick="solveBoth()" id="solveBtn" class="solve-btn">
+              Solve Both
+            </button>
+            <button onclick="solveBFS()" id="bfsBtn" class="bfs-btn">
+              BFS Only
+            </button>
+            <button onclick="solveDFS()" id="dfsBtn" class="dfs-btn">
+              DFS Only
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="group-label">Maze Size</div>
+          <div class="button-group size-group">
+            <button
+              onclick="changeMazeSize('small')"
+              id="smallBtn"
+              class="size-btn active"
+            >
+              Small
+            </button>
+            <button
+              onclick="changeMazeSize('big')"
+              id="bigBtn"
+              class="size-btn"
+            >
+              Big
+            </button>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="group-label">Speed</div>
+          <div class="button-group speed-group">
+            <button onclick="changeSpeed('slow')" class="speed-btn">
+              Slow
+            </button>
+            <button onclick="changeSpeed('normal')" class="speed-btn active">
+              Normal
+            </button>
+            <button onclick="changeSpeed('fast')" class="speed-btn">
+              Fast
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="maze-container">
+        <div class="maze-wrapper">
+          <div class="maze-title bfs-title">BFS (Breadth-First Search)</div>
+          <canvas id="bfsCanvas" width="550" height="550"></canvas>
+          <div class="stats">
+            <div class="stat-row">
+              <span class="stat-label">Nodes Explored:</span>
+              <span class="stat-value" id="bfsExplored">0</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Path Length:</span>
+              <span class="stat-value" id="bfsPath">0</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Time:</span>
+              <span class="stat-value" id="bfsTime">0.00s</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Status:</span>
+              <span class="stat-value" id="bfsStatus">Ready</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="maze-wrapper">
+          <div class="maze-title dfs-title">DFS (Depth-First Search)</div>
+          <canvas id="dfsCanvas" width="550" height="550"></canvas>
+          <div class="stats">
+            <div class="stat-row">
+              <span class="stat-label">Nodes Explored:</span>
+              <span class="stat-value" id="dfsExplored">0</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Path Length:</span>
+              <span class="stat-value" id="dfsPath">0</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Time:</span>
+              <span class="stat-value" id="dfsTime">0.00s</span>
+            </div>
+            <div class="stat-row">
+              <span class="stat-label">Status:</span>
+              <span class="stat-value" id="dfsStatus">Ready</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="legend">
+        <strong>Legend:</strong>
+        <div class="legend-items">
+          <div class="legend-item">
+            <div class="legend-box" style="background: #1a1a2e"></div>
+            <span>Wall</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box" style="background: white"></div>
+            <span>Path</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box" style="background: #4ecca3"></div>
+            <span>Start</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box" style="background: #ff6b6b"></div>
+            <span>End</span>
+          </div>
+          <div class="legend-item">
+            <div
+              class="legend-box"
+              style="background: rgba(78, 204, 163, 0.3)"
+            ></div>
+            <span>Explored (BFS)</span>
+          </div>
+          <div class="legend-item">
+            <div
+              class="legend-box"
+              style="background: rgba(255, 107, 107, 0.3)"
+            ></div>
+            <span>Explored (DFS)</span>
+          </div>
+          <div class="legend-item">
+            <div class="legend-box" style="background: #ffd93d"></div>
+            <span>Final Path</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
