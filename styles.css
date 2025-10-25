@@ -65,6 +65,34 @@ h1 {
   margin-bottom: 10px;
   font-size: 2.5em;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+}
+
+.info-icon {
+  background: var(--bg-overlay-light);
+  border: 1px solid var(--border-light);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0;
+  color: var(--text-primary);
+}
+
+.info-icon:hover {
+  background: var(--bg-overlay-lighter);
+  transform: scale(1.1);
+}
+
+.info-icon svg {
+  pointer-events: none;
 }
 
 .subtitle {
@@ -271,6 +299,126 @@ canvas {
   border-radius: 3px;
 }
 
+/* Info Overlay Styles */
+.info-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 1000;
+  overflow-y: auto;
+  padding: 20px;
+  animation: fadeIn 0.3s ease;
+}
+
+.info-overlay.active {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.info-content {
+  background: linear-gradient(
+    135deg,
+    var(--bg-gradient-start) 0%,
+    var(--bg-gradient-end) 100%
+  );
+  border-radius: 15px;
+  padding: 40px;
+  max-width: 900px;
+  width: 100%;
+  position: relative;
+  margin: 40px auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-light);
+}
+
+.info-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: var(--bg-overlay-light);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 28px;
+  color: var(--text-primary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+  padding: 0;
+}
+
+.info-close:hover {
+  background: var(--btn-dfs);
+  transform: rotate(90deg);
+}
+
+.info-content h2 {
+  margin-bottom: 30px;
+  font-size: 2em;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.info-section {
+  margin-bottom: 25px;
+  background: var(--bg-overlay-lighter);
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.info-section h3 {
+  margin-bottom: 12px;
+  font-size: 1.3em;
+  color: var(--text-primary);
+}
+
+.info-section p {
+  margin-bottom: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.6;
+}
+
+.info-section strong {
+  color: var(--btn-solve);
+}
+
+.info-section .note {
+  font-style: italic;
+  opacity: 0.8;
+  margin-top: 10px;
+}
+
+.info-footer {
+  background: var(--bg-overlay-light);
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+  margin-top: 15px;
+}
+
+.info-footer p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
 @media (max-width: 1200px) {
   .maze-container {
     grid-template-columns: 1fr;
@@ -288,10 +436,21 @@ canvas {
 
   h1 {
     font-size: 2em;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .subtitle {
     font-size: 1em;
+  }
+
+  .info-content {
+    padding: 25px;
+    margin: 20px auto;
+  }
+
+  .info-content h2 {
+    font-size: 1.5em;
   }
 }
 
@@ -303,5 +462,17 @@ canvas {
   button {
     font-size: 12px;
     padding: 8px 16px;
+  }
+
+  .info-overlay {
+    padding: 10px;
+  }
+
+  .info-content {
+    padding: 20px;
+  }
+
+  .info-section {
+    padding: 15px;
   }
 }

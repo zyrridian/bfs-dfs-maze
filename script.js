@@ -377,5 +377,34 @@ function enableButtons() {
   document.getElementById("bigBtn").disabled = false;
 }
 
+function toggleInfo() {
+  const overlay = document.getElementById("infoOverlay");
+  overlay.classList.toggle("active");
+
+  // Prevent body scroll when overlay is open
+  if (overlay.classList.contains("active")) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+}
+
+// Close overlay when clicking outside the content
+document.addEventListener("DOMContentLoaded", function () {
+  const overlay = document.getElementById("infoOverlay");
+  overlay.addEventListener("click", function (e) {
+    if (e.target === overlay) {
+      toggleInfo();
+    }
+  });
+
+  // Close overlay with Escape key
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && overlay.classList.contains("active")) {
+      toggleInfo();
+    }
+  });
+});
+
 // Initialize the maze on page load
 generateMaze();
