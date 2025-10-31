@@ -1,6 +1,7 @@
 import { dom } from "./config.js";
 import { toggleMusic } from "./audio.js";
 import { generateMaze } from "./maze.js";
+import { playClickSound } from "./sounds.js";
 import {
   resetUI,
   handleSizeChange,
@@ -11,20 +12,47 @@ import { solveBFS, solveDFS, solveBoth } from "./solvers.js";
 
 // This runs once the DOM is ready
 document.addEventListener("DOMContentLoaded", () => {
-  // Setup all event listeners
-  dom.musicBtn.addEventListener("click", () => toggleMusic(dom.musicBtn));
-  dom.infoBtn.addEventListener("click", toggleInfo);
-  dom.infoCloseBtn.addEventListener("click", toggleInfo);
+  // Setup all event listeners with sound effects
+  dom.musicBtn.addEventListener("click", () => {
+    playClickSound();
+    toggleMusic(dom.musicBtn);
+  });
+
+  dom.infoBtn.addEventListener("click", () => {
+    playClickSound();
+    toggleInfo();
+  });
+
+  dom.infoCloseBtn.addEventListener("click", () => {
+    playClickSound();
+    toggleInfo();
+  });
 
   dom.generateBtn.addEventListener("click", () => {
+    playClickSound();
     generateMaze();
     resetUI();
   });
 
-  dom.resetBtn.addEventListener("click", resetUI);
-  dom.solveBtn.addEventListener("click", solveBoth);
-  dom.bfsBtn.addEventListener("click", () => solveBFS(false));
-  dom.dfsBtn.addEventListener("click", () => solveDFS(false));
+  dom.resetBtn.addEventListener("click", () => {
+    playClickSound();
+    resetUI();
+  });
+
+  dom.solveBtn.addEventListener("click", () => {
+    playClickSound();
+    solveBoth();
+  });
+
+  dom.bfsBtn.addEventListener("click", () => {
+    playClickSound();
+    solveBFS(false);
+  });
+
+  dom.dfsBtn.addEventListener("click", () => {
+    playClickSound();
+    solveDFS(false);
+  });
 
   // Event delegation for button groups
   dom.sizeGroup.addEventListener("click", (e) => {

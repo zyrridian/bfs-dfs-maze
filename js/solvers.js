@@ -1,6 +1,7 @@
 import { dom, state } from "./config.js";
 import { drawMaze, disableButtons, enableButtons } from "./ui.js";
 import { sleep } from "./utils.js";
+import { playSuccessSound } from "./sounds.js";
 
 // Breadth-First Search
 export async function solveBFS(skipLock = false) {
@@ -36,6 +37,7 @@ export async function solveBFS(skipLock = false) {
       drawMaze(dom.bfsCtx, explored, path);
       dom.bfsPath.textContent = path.length;
       dom.bfsStatus.textContent = "✓ Found!";
+      playSuccessSound(); // Victory sound!
       if (!skipLock) enableButtons();
       return;
     }
@@ -129,6 +131,7 @@ export async function solveDFS(skipLock = false) {
     drawMaze(dom.dfsCtx, explored, path);
     dom.dfsPath.textContent = path.length;
     dom.dfsStatus.textContent = "✓ Found!";
+    playSuccessSound(); // Victory sound!
   } else {
     dom.dfsStatus.textContent = "No path found";
   }

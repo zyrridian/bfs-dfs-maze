@@ -1,25 +1,26 @@
 import { dom, state } from "./config.js";
 import { generateMaze } from "./maze.js";
+import { playClickSound } from "./sounds.js";
 
 // Draw the maze with optional explored cells and path
 export function drawMaze(ctx, explored = new Set(), path = []) {
-  // Fill background
-  ctx.fillStyle = "#0f0f1e";
+  // Fill background (black for pixel art)
+  ctx.fillStyle = "#000000";
   ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
-  // Draw walls and paths
+  // Draw walls and paths (monochrome)
   for (let i = 0; i < state.rows; i++) {
     for (let j = 0; j < state.cols; j++) {
       const x = j * state.cellSize;
       const y = i * state.cellSize;
-      ctx.fillStyle = state.maze[i][j] === 1 ? "#1a1a2e" : "white";
+      // Walls are dark gray, paths are white
+      ctx.fillStyle = state.maze[i][j] === 1 ? "#2a2a2a" : "#ffffff";
       ctx.fillRect(x, y, state.cellSize - 1, state.cellSize - 1);
     }
   }
 
-  // Draw explored cells
-  const color =
-    ctx === dom.bfsCtx ? "rgba(78, 204, 163, 0.4)" : "rgba(255, 107, 107, 0.4)";
+  // Draw explored cells (green for BFS, red for DFS - pixel art colors)
+  const color = ctx === dom.bfsCtx ? "#4ade80" : "#ef4444";
   explored.forEach((key) => {
     const [row, col] = key.split(",").map(Number);
     ctx.fillStyle = color;
@@ -31,24 +32,44 @@ export function drawMaze(ctx, explored = new Set(), path = []) {
     );
   });
 
-  // Draw final path (yellow squares)
+  // Draw final path (yellow/gold with black outline for visibility)
   path.forEach(({ row, col }) => {
-    ctx.fillStyle = "#ffd93d";
     const padding = state.cellSize > 15 ? 3 : 1;
     const size = state.cellSize > 15 ? state.cellSize - 7 : state.cellSize - 2;
+
+    // Black border
+    ctx.fillStyle = "#000000";
+    ctx.fillRect(
+      col * state.cellSize + padding - 1,
+      row * state.cellSize + padding - 1,
+      size + 2,
+      size + 2
+    );
+
+    // Yellow/gold fill
+    ctx.fillStyle = "#fbbf24";
     ctx.fillRect(
       col * state.cellSize + padding,
       row * state.cellSize + padding,
       size,
       size
     );
-  });
-
-  // Draw start point (green)
-  ctx.fillStyle = "#4ecca3";
+  }); // Draw start point (white with black outline)
   const startPadding = state.cellSize > 15 ? 2 : 1;
   const startSize =
     state.cellSize > 15 ? state.cellSize - 5 : state.cellSize - 2;
+
+  // Black border
+  ctx.fillStyle = "#000000";
+  ctx.fillRect(
+    state.start.col * state.cellSize + startPadding - 1,
+    state.start.row * state.cellSize + startPadding - 1,
+    startSize + 2,
+    startSize + 2
+  );
+
+  // Light gray fill for start
+  ctx.fillStyle = "#e0e0e0";
   ctx.fillRect(
     state.start.col * state.cellSize + startPadding,
     state.start.row * state.cellSize + startPadding,
@@ -56,8 +77,16 @@ export function drawMaze(ctx, explored = new Set(), path = []) {
     startSize
   );
 
-  // Draw end point (red)
-  ctx.fillStyle = "#ff6b6b";
+  // Draw end point (dark gray with black outline)
+  ctx.fillStyle = "#000000";
+  ctx.fillRect(
+    state.end.col * state.cellSize + startPadding - 1,
+    state.end.row * state.cellSize + startPadding - 1,
+    startSize + 2,
+    startSize + 2
+  );
+
+  ctx.fillStyle = "#555555";
   ctx.fillRect(
     state.end.col * state.cellSize + startPadding,
     state.end.row * state.cellSize + startPadding,
@@ -83,6 +112,8 @@ export function resetUI() {
 
 // Change animation speed
 export function handleSpeedChange(speed) {
+  playClickSound(); // Pixel sound effect!
+
   document.querySelectorAll("#speedGroup .speed-btn").forEach((btn) => {
     btn.classList.remove("active");
     if (btn.dataset.speed === speed) {
@@ -97,6 +128,8 @@ export function handleSpeedChange(speed) {
 
 // Change maze size
 export function handleSizeChange(size) {
+  playClickSound(); // Pixel sound effect!
+
   document.querySelectorAll("#sizeGroup .size-btn").forEach((btn) => {
     btn.classList.remove("active");
     if (btn.dataset.size === size) {
