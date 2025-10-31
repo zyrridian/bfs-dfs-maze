@@ -12,7 +12,7 @@
         Maze Solver: BFS vs DFS
         <button
           class="info-icon"
-          onclick="toggleInfo()"
+          id="infoBtn"
           title="Learn about the algorithms"
         >
           <svg
@@ -31,12 +31,20 @@
         <button
           class="music-btn"
           id="musicBtn"
-          onclick="toggleMusic()"
+          id="musicBtn"
           title="Toggle background music"
           aria-label="Toggle background music"
         >
           <!-- Muted icon by default (will toggle to sound icon when active) -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            aria-hidden="true"
+          >
             <path d="M11 5 L6 9 H3 v6 h3 l5 4 V5 z" fill="currentColor"></path>
             <line x1="16" y1="8" x2="20" y2="12" stroke="currentColor"></line>
             <line x1="20" y1="12" x2="16" y2="16" stroke="currentColor"></line>
@@ -51,7 +59,7 @@
       <!-- Info Overlay -->
       <div id="infoOverlay" class="info-overlay">
         <div class="info-content">
-          <button class="info-close" onclick="toggleInfo()">×</button>
+          <button class="info-close" id="infoCloseBtn">×</button>
 
           <h2>How These Algorithms Work</h2>
 
@@ -104,66 +112,36 @@
         <div class="control-group">
           <div class="group-label">Actions</div>
           <div class="button-group size-group">
-            <button
-              onclick="generateMaze()"
-              id="generateBtn"
-              class="primary-btn"
-            >
+            <button id="generateBtn" class="primary-btn">
               Generate New Maze
             </button>
-            <button onclick="reset()" id="resetBtn" class="secondary-btn">
-              Reset
-            </button>
+            <button id="resetBtn" class="secondary-btn">Reset</button>
           </div>
         </div>
 
         <div class="control-group">
           <div class="group-label">Solve</div>
           <div class="button-group size-group">
-            <button onclick="solveBoth()" id="solveBtn" class="solve-btn">
-              Solve Both
-            </button>
-            <button onclick="solveBFS()" id="bfsBtn" class="bfs-btn">
-              BFS Only
-            </button>
-            <button onclick="solveDFS()" id="dfsBtn" class="dfs-btn">
-              DFS Only
-            </button>
+            <button id="solveBtn" class="solve-btn">Solve Both</button>
+            <button id="bfsBtn" class="bfs-btn">BFS Only</button>
+            <button id="dfsBtn" class="dfs-btn">DFS Only</button>
           </div>
         </div>
 
         <div class="control-group">
           <div class="group-label">Maze Size</div>
-          <div class="button-group size-group">
-            <button
-              onclick="changeMazeSize('small')"
-              id="smallBtn"
-              class="size-btn active"
-            >
-              Small
-            </button>
-            <button
-              onclick="changeMazeSize('big')"
-              id="bigBtn"
-              class="size-btn"
-            >
-              Big
-            </button>
+          <div class="button-group size-group" id="sizeGroup">
+            <button data-size="small" class="size-btn active">Small</button>
+            <button data-size="big" class="size-btn">Big</button>
           </div>
         </div>
 
         <div class="control-group">
           <div class="group-label">Speed</div>
-          <div class="button-group speed-group">
-            <button onclick="changeSpeed('slow')" class="speed-btn">
-              Slow
-            </button>
-            <button onclick="changeSpeed('normal')" class="speed-btn active">
-              Normal
-            </button>
-            <button onclick="changeSpeed('fast')" class="speed-btn">
-              Fast
-            </button>
+          <div class="button-group speed-group" id="speedGroup">
+            <button data-speed="slow" class="speed-btn">Slow</button>
+            <button data-speed="normal" class="speed-btn active">Normal</button>
+            <button data-speed="fast" class="speed-btn">Fast</button>
           </div>
         </div>
       </div>
@@ -268,7 +246,6 @@
         </p>
       </footer>
     </div>
-
-    <script src="script.js"></script>
+    <script type="module" src="js/main.js"></script>
   </body>
 </html>
